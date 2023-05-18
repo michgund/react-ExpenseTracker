@@ -6,7 +6,7 @@ import categories from "./categories";
 
 const schema = z.object({
   description: z.string().min(3, { message: "Description should be at least 3 characters" }).max(50),
-  amount: z.number({ invalid_type_error: "Amount is required." }).min(0.01).max(100_100),
+  price: z.number({ invalid_type_error: "Price is required." }).min(0.01).max(100_100),
   category: z.enum(categories, {
     errorMap: () => ({ message: "Category is required." }),
   }),
@@ -42,11 +42,11 @@ const ExpenseForm = ({ onSubmit }: Props) => {
           {errors.description && <p className="text-danger">{errors.description.message}</p>}
         </div>
         <div className="mb-3">
-          <label htmlFor="amount" className="form-label">
-            Amount
+          <label htmlFor="price" className="form-label">
+            Price
           </label>
-          <input {...register("amount", { required: true, valueAsNumber: true })} id="amount" type="number" className="form-control" />
-          {errors.amount && <p className="text-danger">{errors.amount.message}</p>}
+          <input {...register("price", { required: true, valueAsNumber: true })} id="price" type="number" className="form-control" />
+          {errors.price && <p className="text-danger">{errors.price.message}</p>}
         </div>
         <div className="mb-3">
           <label htmlFor="category" className="form-label">
